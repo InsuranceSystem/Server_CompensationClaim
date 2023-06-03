@@ -1,4 +1,4 @@
-package server;
+
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -13,6 +13,7 @@ import CompensationClaim.CompensationClaimList;
 import CompensationClaim.CompensationClaimListImpl;
 import CompensationClaim.SurveyList;
 import CompensationClaim.SurveyListImpl;
+import Interface.CC_ServerIF;
 
 
 

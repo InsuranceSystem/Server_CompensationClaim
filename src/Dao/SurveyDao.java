@@ -1,7 +1,6 @@
 package Dao;
 
 import CompensationClaim.Survey;
-import Insurance.Insurance;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
