@@ -46,17 +46,17 @@ public class CCServer extends UnicastRemoteObject implements CC_ServerIF{
 		}
 	}
 	@Override
-	public CarAccidentList getCarAccidentList() {
+	public CarAccidentList getCarAccidentList() throws RemoteException{
 		return CarAccidentList;
 	}
 
 	@Override
-	public SurveyList getSurveyList() {
+	public SurveyList getSurveyList() throws RemoteException{
 		return SurveyList;
 	}
 	
 	@Override
-	public CompensationClaimList getCompensationClaimList() {
+	public CompensationClaimList getCompensationClaimList() throws RemoteException{
 		return CompensationClaimList;
 	}
 }
