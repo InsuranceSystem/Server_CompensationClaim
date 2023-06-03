@@ -5,6 +5,8 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import CompensationClaim.CarAccidentList;
@@ -30,9 +32,11 @@ public class CCServer extends UnicastRemoteObject implements CC_ServerIF{
 	
 	public static void main(String[] args) throws Exception {
 		try {
-			CCServer server = new CCServer();
-			Naming.rebind("CompensationClaim_Server", server);
 			
+		//	Naming.rebind("CompensationClaim_Server", server);	
+			Registry registry = LocateRegistry.createRegistry(1300);
+			CCServer server = new CCServer();
+	        registry.rebind("CompensationClaim_Server", server);	
 			CarAccidentList = new CarAccidentListImpl();
 			SurveyList = new SurveyListImpl();
 			CompensationClaimList = new CompensationClaimListImpl();
