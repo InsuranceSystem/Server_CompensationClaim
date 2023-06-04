@@ -1,11 +1,13 @@
 package Dao;
 
-import CompensationClaim.CarAccident;
-
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class CarAccidentDao extends Dao{
+import Interface.CarAccident;
+
+public class CarAccidentDao extends Dao implements Serializable {
+    private static final long serialVersionUID = 1L;
 	public CarAccidentDao() {
 		try {
 			super.connect();

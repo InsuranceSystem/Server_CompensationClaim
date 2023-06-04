@@ -1,4 +1,4 @@
-package CompensationClaim;
+package Interface;
 
 import Dao.CarAccidentDao;
 
@@ -9,7 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class CarAccidentListImpl implements CarAccidentList, Remote{
+public class CarAccidentListImpl implements CarAccidentList, Remote, Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private ArrayList<CarAccident> carAccidentList;
 	public CarAccidentDao carAccidentDao;

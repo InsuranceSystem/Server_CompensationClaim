@@ -1,6 +1,8 @@
-package CompensationClaim;
+package Interface;
 
 import java.time.LocalDateTime;
+
+import CompensationClaim.CompensationClaim;
 
 public class CarAccident extends CompensationClaim {
 

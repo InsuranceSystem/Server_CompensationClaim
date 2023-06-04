@@ -1,11 +1,13 @@
 package Dao;
 
-import CompensationClaim.CompensationClaim;
-
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class CompensationClaimDao extends Dao{
+import CompensationClaim.CompensationClaim;
+
+public class CompensationClaimDao extends Dao implements Serializable {
+    private static final long serialVersionUID = 1L;
 	public CompensationClaimDao() {
 		try {
 			super.connect();

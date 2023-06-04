@@ -2,10 +2,12 @@ package Dao;
 
 import CompensationClaim.Survey;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class SurveyDao extends Dao{
+public class SurveyDao extends Dao implements Serializable {
+    private static final long serialVersionUID = 1L;
 	public SurveyDao() {
 		try {
 			super.connect();
