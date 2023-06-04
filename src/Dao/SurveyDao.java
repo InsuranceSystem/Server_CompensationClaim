@@ -1,6 +1,6 @@
 package Dao;
 
-import CompensationClaim.Survey;
+import Interface.Survey;
 
 import java.io.Serializable;
 import java.sql.ResultSet;

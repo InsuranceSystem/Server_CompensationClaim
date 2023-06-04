@@ -9,10 +9,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
-import CompensationClaim.CompensationClaimListImpl;
-import CompensationClaim.SurveyListImpl;
+import ListImpl.CompensationClaimListImpl;
+import ListImpl.SurveyListImpl;
 import Interface.CarAccidentList;
-import Interface.CarAccidentListImpl;
+import ListImpl.CarAccidentListImpl;
 import Interface.CompensationClaimList;
 import Interface.SurveyList;
 

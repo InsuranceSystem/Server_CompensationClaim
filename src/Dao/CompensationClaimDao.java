@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import CompensationClaim.CompensationClaim;
+import Interface.CompensationClaim;
 
 public class CompensationClaimDao extends Dao implements Serializable {
     private static final long serialVersionUID = 1L;
