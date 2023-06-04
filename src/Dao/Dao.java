@@ -11,7 +11,7 @@
  		try {
  			Class.forName("com.mysql.cj.jdbc.Driver");
  			connect = DriverManager.getConnection(
- 					"jdbc:mysql://localhost:3306/insurance?serverTimezone=UTC&useSSL=false", "root", "sso8690@");
+					"jdbc:mysql://localhost:3306/insurance?serverTimezone=UTC&useSSL=false", "root", "0721");
  		} catch (Exception e) {
  			// TODO Auto-generated catch block
  			e.printStackTrace();
@@ -20,8 +20,8 @@
 	public void create(String query) {
 	try {
 		statement = connect.createStatement();
-		if (!statement.execute(query))
-			System.out.println("insert OK!!!");
+//		if (!statement.execute(query))
+//			System.out.println("insert OK!!!");
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -42,8 +42,8 @@
 	public void update(String query) {
 	try {
 		statement = connect.createStatement();
-		if (!statement.execute(query))
-			System.out.println("update OK!!!");
+//		if (!statement.execute(query))
+//			System.out.println("update OK!!!");
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -52,8 +52,8 @@
 	public void delete(String query) {
 	try {
 		statement = connect.createStatement();
-		if (!statement.execute(query))
-			System.out.println("delete OK!!!");
+//		if (!statement.execute(query))
+//			System.out.println("delete OK!!!");
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
