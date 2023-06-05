@@ -1,6 +1,5 @@
 package Dao;
 
-import CompensationClaim.Survey;
 import Exception.DaoException;
 
 import Interface.Survey;
