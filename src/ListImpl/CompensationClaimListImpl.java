@@ -1,13 +1,17 @@
-package CompensationClaim;
+package ListImpl;
 
 import Dao.CompensationClaimDao;
+import Interface.CompensationClaim;
+import Interface.CompensationClaimList;
+import Interface.Survey;
 
 import java.io.*;
 import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class CompensationClaimListImpl implements CompensationClaimList, Remote{
+public class CompensationClaimListImpl implements CompensationClaimList, Remote, Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private ArrayList<CompensationClaim> compensationClaimList;
 	private CompensationClaimDao compensationClaimDao;

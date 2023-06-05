@@ -1,5 +1,6 @@
 package Dao;
 
+
 import CompensationClaim.CarAccident;
 import Exception.DaoException;
 
@@ -17,6 +18,16 @@ public class CarAccidentDao extends Dao {
 	}
 
 	public void create(CarAccident carAccident) throws DaoException {
+
+import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import Interface.CarAccident;
+
+public class CarAccidentDao extends Dao implements Serializable {
+    private static final long serialVersionUID = 1L;
+	public CarAccidentDao() {
 		try {
 			String query = "INSERT INTO CarAccident (CCID, type, dateTime, carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
 					+ carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime() + "','"

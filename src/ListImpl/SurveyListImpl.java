@@ -1,14 +1,17 @@
-package CompensationClaim;
+package ListImpl;
 
 import Dao.CompensationClaimDao;
 import Dao.SurveyDao;
+import Interface.Survey;
+import Interface.SurveyList;
 
 import java.io.*;
 import java.rmi.Remote;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class SurveyListImpl implements SurveyList, Remote{
+public class SurveyListImpl implements SurveyList, Remote, Serializable {
+    private static final long serialVersionUID = 1L;
 
     private ArrayList<Survey> surveyList;
     public SurveyDao surveyDao;

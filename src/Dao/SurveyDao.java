@@ -3,17 +3,20 @@ package Dao;
 import CompensationClaim.Survey;
 import Exception.DaoException;
 
+import Interface.Survey;
+
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class SurveyDao extends Dao {
 	public SurveyDao() throws DaoException {
-        try {
-            super.connect();
-        } catch (Exception e) {
-            System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
-            System.out.println("DAO Exception 발생한 메서드: " + ((DaoException) e).getDaoMethodName());
-        }
+		try {
+			super.connect();
+		} catch (Exception e) {
+			System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
+			System.out.println("DAO Exception 발생한 메서드: " + ((DaoException) e).getDaoMethodName());
+		}
 	}
 
 	public void create(Survey survey) throws DaoException {
