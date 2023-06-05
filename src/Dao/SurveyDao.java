@@ -1,13 +1,11 @@
 package Dao;
 
-import CompensationClaim.Survey;
-import Exception.DaoException;
-
 import Interface.Survey;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import Exception.DaoException;
 
 public class SurveyDao extends Dao {
 	public SurveyDao() throws DaoException {

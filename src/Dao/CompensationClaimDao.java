@@ -1,10 +1,11 @@
 package Dao;
 
-import CompensationClaim.CompensationClaim;
-import Exception.DaoException;
-
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import Exception.DaoException;
+import Interface.CompensationClaim;
 
 public class CompensationClaimDao extends Dao {
 	public CompensationClaimDao() throws DaoException {
@@ -104,3 +105,4 @@ public class CompensationClaimDao extends Dao {
             throw new DaoException("CompensationClaim 삭제 중에 오류가 발생했습니다.", "deleteAll");
         }
     }
+}

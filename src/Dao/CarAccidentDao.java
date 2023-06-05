@@ -1,33 +1,25 @@
 package Dao;
 
-
-import CompensationClaim.CarAccident;
-import Exception.DaoException;
-
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
-public class CarAccidentDao extends Dao {
-	public CarAccidentDao() throws DaoException {
-        try {
-            super.connect();
-        } catch (Exception e) {
-            System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
-            System.out.println("DAO Exception 발생한 메서드: " + ((DaoException) e).getDaoMethodName());
-        }
-	}
-
-	public void create(CarAccident carAccident) throws DaoException {
-
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import Exception.DaoException;
 import Interface.CarAccident;
 
 public class CarAccidentDao extends Dao implements Serializable {
-    private static final long serialVersionUID = 1L;
-	public CarAccidentDao() {
+	private static final long serialVersionUID = 1L;
+
+	public CarAccidentDao() throws DaoException {
+		try {
+			super.connect();
+		} catch (Exception e) {
+			System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
+			System.out.println("DAO Exception 발생한 메서드: " + ((DaoException) e).getDaoMethodName());
+		}
+	}
+
+	public void create(CarAccident carAccident) throws DaoException {
 		try {
 			String query = "INSERT INTO CarAccident (CCID, type, dateTime, carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
 					+ carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime() + "','"
