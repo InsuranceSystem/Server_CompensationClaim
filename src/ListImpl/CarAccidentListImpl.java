@@ -1,6 +1,8 @@
-package Interface;
+package ListImpl;
 
 import Dao.CarAccidentDao;
+import Interface.CarAccident;
+import Interface.CarAccidentList;
 
 import java.io.*;
 import java.rmi.Remote;

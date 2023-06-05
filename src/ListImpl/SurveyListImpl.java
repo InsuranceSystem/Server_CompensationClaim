@@ -1,7 +1,8 @@
-package CompensationClaim;
+package ListImpl;
 
 import Dao.CompensationClaimDao;
 import Dao.SurveyDao;
+import Interface.Survey;
 import Interface.SurveyList;
 
 import java.io.*;

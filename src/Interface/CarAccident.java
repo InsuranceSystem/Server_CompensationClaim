@@ -1,10 +1,11 @@
 package Interface;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import CompensationClaim.CompensationClaim;
 
-public class CarAccident extends CompensationClaim {
+public class CarAccident extends CompensationClaim implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 	private String type;
 	private LocalDateTime dateTime;
