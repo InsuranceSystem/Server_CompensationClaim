@@ -54,6 +54,7 @@ public class CCServer extends UnicastRemoteObject {
 			System.out.println("CompensationClaim Server is ready !!!");
 
 		} catch (RemoteException e) {
+			e.printStackTrace();
 			System.out.println("Remote exception occurred: " + e.getMessage());
 		} catch (CustomNotBoundException e) {
 			System.out.println("Not bound exception occurred: " + e.getMessage());
