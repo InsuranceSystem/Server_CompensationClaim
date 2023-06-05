@@ -4,6 +4,7 @@ import Dao.CompensationClaimDao;
 import Dao.SurveyDao;
 import Interface.Survey;
 import Interface.SurveyList;
+import Exception.DaoException;
 
 import java.io.*;
 import java.rmi.Remote;
@@ -17,6 +18,7 @@ public class SurveyListImpl implements SurveyList, Remote, Serializable {
     public SurveyDao surveyDao;
 
     public SurveyListImpl() throws Exception {
+        this.surveyList = new ArrayList<>(); // surveyList 초기화
         this.surveyDao = new SurveyDao();
         this.surveyList = surveyDao.retrieveAll();
     }
@@ -29,7 +31,7 @@ public class SurveyListImpl implements SurveyList, Remote, Serializable {
     public boolean update(Survey updateSurvey) throws Exception {
         for (int i = 0; i < this.surveyList.size(); i++) {
             Survey survey = (Survey) this.surveyList.get(i);
-            if (survey.matchId(updateSurvey.getCCID())) {
+            if (survey.matchID(updateSurvey.getCCID())) {
                 this.surveyList.set(i, updateSurvey);
                 surveyDao.update(updateSurvey);
                 return true;
@@ -48,5 +50,17 @@ public class SurveyListImpl implements SurveyList, Remote, Serializable {
             return true;
         }
         else return false;
+    }
+
+    public boolean deleteById(String ccid) throws DaoException {
+        boolean DoDelete=false;
+        for(int i=0;i<this.surveyList.size();i++) {
+            if(this.surveyList.get(i).matchID(ccid)) {
+                this.surveyList.remove(i);
+                DoDelete=true;
+            }
+        }
+        this.surveyDao.deleteById(ccid);
+        return DoDelete;
     }
 }//end carAccidentListImpl

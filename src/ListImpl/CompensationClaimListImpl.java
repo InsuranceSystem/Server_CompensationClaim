@@ -7,6 +7,7 @@ import Interface.Survey;
 
 import java.io.*;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -31,6 +32,18 @@ public class CompensationClaimListImpl implements CompensationClaimList, Remote,
 		return false;
 	}
 
+	@Override
+	public boolean delete(String CCID) throws Exception, RemoteException {
+		for (int i = 0; i < this.compensationClaimList.size(); i++) {
+			CompensationClaim compensationClaim = (CompensationClaim) this.compensationClaimList.get(i);
+			if (compensationClaim.matchId(CCID))
+				if (this.compensationClaimList.remove(compensationClaim)) {
+					surveyList.deleteById(CCID);
+					compensationClaimDao.deleteById(CCID);
+					return true;}
+				else return false;}
+		return false;
+	}
 	public boolean createCompensationClaim(CompensationClaim compensationClaim) throws Exception {
 		if (this.compensationClaimList.add(compensationClaim)) {
 			compensationClaimDao.create(compensationClaim);
