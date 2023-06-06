@@ -1,7 +1,7 @@
 package Dao;
 
 import java.sql.*;
-
+import java.sql.DriverManager;
  public class Dao {
  		Connection connect = null;
  		Statement statement = null;		
@@ -10,7 +10,7 @@ import java.sql.*;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/counsel", "root", "1357");
+					"jdbc:mysql://localhost:3306/insuranceSystem?serverTimezone=UTC", "root", "dlqhgus1");
 		} catch (ClassNotFoundException e) {
 			throw new Exception("JDBC 드라이버를 찾을 수 없습니다.", e);
 		} catch (SQLException e) {
