@@ -1,11 +1,10 @@
 package Dao;
 
-import java.io.Serializable;
+import Interface.CompensationClaim;
+import Exception.DaoException;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import Exception.DaoException;
-import Interface.CompensationClaim;
 
 public class CompensationClaimDao extends Dao {
 	public CompensationClaimDao() throws DaoException {

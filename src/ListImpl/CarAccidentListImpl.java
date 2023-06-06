@@ -3,9 +3,11 @@ package ListImpl;
 import Dao.CarAccidentDao;
 import Interface.CarAccident;
 import Interface.CarAccidentList;
-
+import Interface.CompensationClaim;
+import Exception.DaoException;
 import java.io.*;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,12 +25,33 @@ public class CarAccidentListImpl implements CarAccidentList, Remote, Serializabl
 	}
 	public void finalize() throws Throwable {
 	}
+
+	@Override
+	public CarAccident getCarAccidentByID(String ccid) {
+		for(int i=0;i<this.carAccidentList.size();i++) {
+			CarAccident carAccident = (CarAccident) this.carAccidentList.get(i);
+			if(carAccident.matchId(ccid))
+				return carAccident;
+		}
+		return null;
+	}
+
 	public boolean add(){
 		return false;
 	}
-	public boolean delete(){
+
+	@Override
+	public boolean delete(String ccid) throws Exception, RemoteException {
+		for (int i = 0; i < this.carAccidentList.size(); i++) {
+			CarAccident carAccident = (CarAccident) this.carAccidentList.get(i);
+			if (carAccident.matchId(ccid))
+				if (this.carAccidentList.remove(carAccident)) {
+					carAccidentDao.deleteById(ccid);
+					return true;}
+				else return false;}
 		return false;
 	}
+
 	public ArrayList<CarAccident> retrieve(){
 		return carAccidentList;
 	}
