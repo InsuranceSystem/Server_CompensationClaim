@@ -48,7 +48,7 @@ public class CompensationClaimListImpl implements CompensationClaimList, Remote,
 		if (this.compensationClaimList.add(compensationClaim)) {
 			compensationClaimDao.create(compensationClaim);
 			Survey survey = new Survey();
-			surveyList.create(survey);
+			surveyList.createSurvey(survey);
 			return true;
 		}
 		else return false;
