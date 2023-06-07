@@ -1,15 +1,13 @@
 package ListImpl;
 
-import Dao.CompensationClaimDao;
 import Dao.SurveyDao;
 import Interface.Survey;
 import Interface.SurveyList;
-import Exception.DaoException;
 
 import java.io.*;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class SurveyListImpl implements SurveyList, Remote, Serializable {
     private static final long serialVersionUID = 1L;
@@ -25,34 +23,43 @@ public class SurveyListImpl implements SurveyList, Remote, Serializable {
     public void finalize() throws Throwable {
     }
 
-    public ArrayList<Survey> retrieve(){
-        return surveyList;
-    }
-    public boolean update(Survey updateSurvey) throws Exception {
-        for (int i = 0; i < this.surveyList.size(); i++) {
-            Survey survey = (Survey) this.surveyList.get(i);
-            if (survey.matchID(updateSurvey.getCCID())) {
-                this.surveyList.set(i, updateSurvey);
-                surveyDao.update(updateSurvey);
-                return true;
-            }
-        }
-        return false;    }
-    public boolean createSurvey(Survey survey) throws Exception {
+    @Override
+    public boolean createSurvey(Survey survey) throws Exception, RemoteException {
         if(this.surveyList.add(survey)) {
-            surveyDao.create(survey);
-            return true;
-        } else return false;
-    }
-    public boolean create(Survey survey) throws Exception {
-        if(this.surveyList.add(survey)) {
-            surveyDao.create(survey);
+            surveyDao.createSurvey(survey);
             return true;
         }
         else return false;
     }
 
-    public boolean deleteById(String ccid) throws DaoException {
+    public ArrayList<Survey> retrieve(){
+        return surveyList;
+    }
+
+    @Override
+    public boolean updateSurvey(Survey updateSurvey) throws Exception, RemoteException {
+        for (int i = 0; i < this.surveyList.size(); i++) {
+            Survey survey = (Survey) this.surveyList.get(i);
+            if (survey.matchID(updateSurvey.getCCID()))
+                this.surveyList.set(i, updateSurvey);
+            surveyDao.updateSurvey(updateSurvey);
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public Survey getSurveyByID(String ccid) throws RemoteException {
+        for(int i=0;i<this.surveyList.size();i++) {
+            Survey survey = (Survey) this.surveyList.get(i);
+            if(survey.matchID(ccid))
+                return survey;
+        }
+        return null;
+    }
+    @Override
+    public boolean deleteById(String ccid) throws Exception, RemoteException {
         boolean DoDelete=false;
         for(int i=0;i<this.surveyList.size();i++) {
             if(this.surveyList.get(i).matchID(ccid)) {
