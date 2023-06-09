@@ -47,8 +47,8 @@ public class CompensationClaimListImpl implements CompensationClaimList, Remote,
 	public boolean createCompensationClaim(CompensationClaim compensationClaim) throws Exception {
 		if (this.compensationClaimList.add(compensationClaim)) {
 			compensationClaimDao.create(compensationClaim);
-			Survey survey = new Survey();
-			surveyList.create(survey);
+//			Survey survey = new Survey();
+//			surveyList.createSurvey(survey);
 			return true;
 		}
 		else return false;

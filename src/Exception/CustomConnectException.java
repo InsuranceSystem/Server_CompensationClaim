@@ -1,14 +1,12 @@
 package Exception;
 
-public class CustomConnectException extends Exception {
+import java.net.ConnectException;
+
+public class CustomConnectException extends ConnectException {
 
 	private static final long serialVersionUID = 1L;
 
 	public CustomConnectException(String message) {
 		super(message);
 	}
-
-	public CustomConnectException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

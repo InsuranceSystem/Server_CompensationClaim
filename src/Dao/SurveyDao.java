@@ -4,7 +4,6 @@ import Exception.DaoException;
 
 import Interface.Survey;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class SurveyDao extends Dao {
 		}
 	}
 
-	public void create(Survey survey) throws DaoException {
+	public void createSurvey(Survey survey) throws DaoException {
 		try {
 			String query = "INSERT INTO Survey (CCID, managerName, reportFilePath, surveyFee, decisionMoney, responsibility, responsibilityReason) VALUES ('"
 					+ survey.getCCID() + "','" + survey.getManagerName() + "','" + survey.getReportFilePath() + "','"
@@ -72,7 +71,7 @@ public class SurveyDao extends Dao {
 
 	}
 
-	public void update(Survey survey) throws DaoException {
+	public void updateSurvey(Survey survey) throws DaoException {
 		try {
 			String query = "UPDATE Survey SET CCID = '" + survey.getCCID() + "', managerName = '"
 					+ survey.getManagerName() + "', reportFilePath = '" + survey.getReportFilePath()
