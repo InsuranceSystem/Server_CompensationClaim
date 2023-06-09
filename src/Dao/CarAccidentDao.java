@@ -14,9 +14,8 @@ public class CarAccidentDao extends Dao implements Serializable {
       try {
          super.connect();
       } catch (Exception e) {
-//         System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
+         System.out.println("데이터베이스 연결에 실패했습니다." + e.getMessage());
          System.out.println("DAO Exception 발생한 메서드: " + ((DaoException) e).getDaoMethodName());
-         throw new DaoException("데이터베이스 연결에 실패했습니다.", "connect");
       }
    }
 
