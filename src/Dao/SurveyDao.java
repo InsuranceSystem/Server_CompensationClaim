@@ -4,7 +4,7 @@ import Exception.DaoException;
 
 import Interface.Survey;
 
-import java.sql.PreparedStatement;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,18 +18,13 @@ public class SurveyDao extends Dao {
 		}
 	}
 
-	public void createSurvey(Survey survey) throws DaoException {
-		String query = "INSERT INTO Survey (CCID, managerName, reportFilePath, surveyFee, decisionMoney, responsibility, responsibilityReason) VALUES (?,?,?,?,?,?,?)";
-
-		try(PreparedStatement statement = connect.prepareStatement(query)) {
-			statement.setString(1, survey.getCCID());
-			statement.setString(2, survey.getManagerName());
-			statement.setString(3, survey.getReportFilePath());
-			statement.setInt(4, survey.getSurveyFee());
-			statement.setLong(5, survey.getDecisionMoney());
-			statement.setBoolean(6, survey.isResponsibility());
-			statement.setString(7,  survey.getResponsibilityReason());
-			statement.executeUpdate();
+	public void create(Survey survey) throws DaoException {
+		try {
+			String query = "INSERT INTO Survey (CCID, managerName, reportFilePath, surveyFee, decisionMoney, responsibility, responsibilityReason) VALUES ('"
+					+ survey.getCCID() + "','" + survey.getManagerName() + "','" + survey.getReportFilePath() + "','"
+					+ survey.getSurveyFee() + "','" + survey.getDecisionMoney() + "','" + survey.isResponsibility()
+					+ "','" + survey.getResponsibilityReason() + "');";
+			super.create(query);
 		} catch (Exception e) {
 			// 예외를 DaoException으로 래핑하여 다시 던짐
 			throw new DaoException("Survey 생성 중에 오류가 발생했습니다.", "create");
@@ -77,25 +72,19 @@ public class SurveyDao extends Dao {
 
 	}
 
-	public void updateSurvey(Survey survey) throws DaoException {
+	public void update(Survey survey) throws DaoException {
 		try {
-			String query = "UPDATE Survey SET CCID = ?, managerName = ?, reportFilePath = ?, surveyFee = ?, decisionMoney = ?, responsibility = ?, responsibilityReason = ? WHERE CCID = ?";
-			try (PreparedStatement statement = connect.prepareStatement(query)) {
-				statement.setString(1, survey.getCCID());
-				statement.setString(2, survey.getManagerName());
-				statement.setString(3, survey.getReportFilePath());
-				statement.setInt(4, survey.getSurveyFee());
-				statement.setLong(5, survey.getDecisionMoney());
-				statement.setBoolean(6, survey.isResponsibility());
-				statement.setString(7, survey.getResponsibilityReason());
-				statement.setString(8, survey.getCCID());
-				statement.executeUpdate();
-			}
+			String query = "UPDATE Survey SET CCID = '" + survey.getCCID() + "', managerName = '"
+					+ survey.getManagerName() + "', reportFilePath = '" + survey.getReportFilePath()
+					+ "', surveyFee = '" + survey.getSurveyFee() + "', decisionMoney = '" + survey.getDecisionMoney()
+					+ "', " + "responsibility = '" + survey.isResponsibility() + "', responsibilityReason = '"
+					+ survey.getResponsibilityReason() + "' WHERE CCID = '" + survey.getCCID() + "';";
+			super.update(query);
 		} catch (Exception e) {
 			throw new DaoException("Survey 업데이트 중에 오류가 발생했습니다.", "update");
 		}
-	}
 
+	}
 
 	public void updateById(String CCID, String column, String content) throws DaoException {
 		try {

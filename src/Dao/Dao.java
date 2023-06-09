@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connect = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/insuranceSystem?serverTimezone=UTC", "root", "dlqhgus1");
+			"jdbc:mysql://localhost:3306/insurance?serverTimezone=UTC&useSSL=false", "root", "sso8690@");
 		} catch (ClassNotFoundException e) {
 			throw new Exception("JDBC 드라이버를 찾을 수 없습니다.", e);
 		} catch (SQLException e) {

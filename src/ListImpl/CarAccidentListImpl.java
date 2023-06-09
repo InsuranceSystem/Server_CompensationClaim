@@ -27,7 +27,7 @@ public class CarAccidentListImpl implements CarAccidentList, Remote, Serializabl
 	}
 
 	@Override
-	public CarAccident getCarAccidentByID(String ccid) throws Exception, RemoteException{
+	public CarAccident getCarAccidentByID(String ccid) {
 		for(int i=0;i<this.carAccidentList.size();i++) {
 			CarAccident carAccident = (CarAccident) this.carAccidentList.get(i);
 			if(carAccident.matchId(ccid))
