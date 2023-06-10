@@ -1,15 +1,13 @@
 package ListImpl;
 
-import Dao.CompensationClaimDao;
 import Dao.SurveyDao;
 import Interface.Survey;
 import Interface.SurveyList;
-import Exception.DaoException;
 
 import java.io.*;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class SurveyListImpl implements SurveyList, Remote, Serializable {
     private static final long serialVersionUID = 1L;
@@ -24,43 +22,50 @@ public class SurveyListImpl implements SurveyList, Remote, Serializable {
     }
     public void finalize() throws Throwable {
     }
+    @Override
+    public boolean createSurvey(Survey survey) throws Exception, RemoteException {
+        if(this.surveyList.add(survey)) {
+            surveyDao.createSurvey(survey);
+            return true;
+        } else return false;    }
 
-    public ArrayList<Survey> retrieve(){
+    @Override
+    public ArrayList<Survey> retrieve() throws Exception {
+        this.surveyList = surveyDao.retrieveAll();
         return surveyList;
     }
-    public boolean update(Survey updateSurvey) throws Exception {
+
+    @Override
+    public boolean updateSurvey(Survey updateSurvey) throws Exception, RemoteException {
         for (int i = 0; i < this.surveyList.size(); i++) {
             Survey survey = (Survey) this.surveyList.get(i);
             if (survey.matchID(updateSurvey.getCCID())) {
                 this.surveyList.set(i, updateSurvey);
-                surveyDao.update(updateSurvey);
+                surveyDao.updateSurvey(updateSurvey);
                 return true;
             }
         }
-        return false;    }
-    public boolean createSurvey(Survey survey) throws Exception {
-        if(this.surveyList.add(survey)) {
-            surveyDao.create(survey);
-            return true;
-        } else return false;
-    }
-    public boolean create(Survey survey) throws Exception {
-        if(this.surveyList.add(survey)) {
-            surveyDao.create(survey);
-            return true;
-        }
-        else return false;
+        return false;
     }
 
-    public boolean deleteById(String ccid) throws DaoException {
-        boolean DoDelete=false;
+    @Override
+    public Survey getSurveyByID(String ccid) throws Exception, RemoteException {
+        for(int i=0;i<this.surveyList.size();i++) {
+            Survey survey = (Survey) this.surveyList.get(i);
+            if(survey.matchID(ccid))
+                return survey;
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteById(String ccid) throws Exception, RemoteException {
         for(int i=0;i<this.surveyList.size();i++) {
             if(this.surveyList.get(i).matchID(ccid)) {
                 this.surveyList.remove(i);
-                DoDelete=true;
             }
         }
         this.surveyDao.deleteById(ccid);
-        return DoDelete;
     }
+
 }//end carAccidentListImpl
