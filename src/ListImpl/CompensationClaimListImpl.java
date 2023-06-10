@@ -3,13 +3,12 @@ package ListImpl;
 import Dao.CompensationClaimDao;
 import Interface.CompensationClaim;
 import Interface.CompensationClaimList;
-import Interface.Survey;
+import Exception.DaoException;
 
 import java.io.*;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 public class CompensationClaimListImpl implements CompensationClaimList, Remote, Serializable {
     private static final long serialVersionUID = 1L;
@@ -38,17 +37,20 @@ public class CompensationClaimListImpl implements CompensationClaimList, Remote,
 			CompensationClaim compensationClaim = (CompensationClaim) this.compensationClaimList.get(i);
 			if (compensationClaim.matchId(CCID))
 				if (this.compensationClaimList.remove(compensationClaim)) {
-					surveyList.deleteById(CCID);
-					compensationClaimDao.deleteById(CCID);
+                    try {
+                        surveyList.deleteById(CCID);
+                    } catch (DaoException e) {
+                        throw new RuntimeException(e);
+                    }
+                    compensationClaimDao.deleteById(CCID);
 					return true;}
 				else return false;}
 		return false;
 	}
+
 	public boolean createCompensationClaim(CompensationClaim compensationClaim) throws Exception {
 		if (this.compensationClaimList.add(compensationClaim)) {
 			compensationClaimDao.create(compensationClaim);
-			Survey survey = new Survey();
-			surveyList.create(survey);
 			return true;
 		}
 		else return false;

@@ -21,10 +21,10 @@ public class CarAccidentDao extends Dao implements Serializable {
 
    public void create(CarAccident carAccident) throws DaoException {
       try {
-         String query = "INSERT INTO CarAccident (CCID, type, dateTime, carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
-               + carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime() + "','"
-               + carAccident.getCarNumber() + "','" + carAccident.getDriverName() + "','"
-               + carAccident.getLicenseNumber() + "','" + carAccident.getAccidentDetail() + "');";
+         String query = "INSERT INTO CarAccident (CCID, type, dateTime, place carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
+                 + carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime() +"','"
+                 + carAccident.getPlace() + "','" + carAccident.getCarNumber() + "','" + carAccident.getDriverName() + "','"
+                 + carAccident.getLicenseNumber() + "','" + carAccident.getAccidentDetail() + "');";
          super.create(query);
       } catch (Exception e) {
          throw new DaoException("CarAccident 생성 중에 오류가 발생했습니다.", "create");
@@ -36,9 +36,9 @@ public class CarAccidentDao extends Dao implements Serializable {
          CarAccident carAccident;
          for (int i = 0; i < carAccidentList.size(); i++) {
             carAccident = carAccidentList.get(i);
-            String query = "INSERT INTO CarAccident (CCID, type, dateTime, carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
-                  + carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime()
-                  + "','" + carAccident.getCarNumber() + "','" + carAccident.getDriverName() + "','"
+            String query = "INSERT INTO CarAccident (CCID, type, dateTime, place carNumber, driverName, licenseNumber, accidentDetail) VALUES ('"
+                  + carAccident.getCCID() + "','" + carAccident.getType() + "','" + carAccident.getDateTime() +"','"
+                  + carAccident.getPlace() + "','" + carAccident.getCarNumber() + "','" + carAccident.getDriverName() + "','"
                   + carAccident.getLicenseNumber() + "','" + carAccident.getAccidentDetail() + "');";
             super.create(query);
          }
@@ -58,6 +58,7 @@ public class CarAccidentDao extends Dao implements Serializable {
             carAccident.setCCID(results.getString("CCID"));
             carAccident.setType(results.getString("type"));
             carAccident.setDateTime(results.getTimestamp("dateTime").toLocalDateTime());
+            carAccident.setPlace(results.getString("place"));
             carAccident.setCarNumber(results.getString("carNumber"));
             carAccident.setDriverName(results.getString("driverName"));
             carAccident.setLicenseNumber(results.getString("licenseNumber"));
